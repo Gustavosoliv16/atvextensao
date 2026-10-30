@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Descomplica CLT - Seus Direitos Trabalhistas</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Variáveis de cor - tema papel reciclado */
+:root{
+--bg:#EBE3D5;
+--surface:#F5EFE6;
+--ink:#3D2F1F;
+--muted:#6B5D4F;
+--line:#C9BCA8;
+--accent:#D4A574;
+--accent-ink:#3D2F1F;
+--hero:#5C4033;
+--hero-ink:#F5EFE6;
+--shadow:rgba(93,64,51,0.15);
+box-sizing:border-box;
+padding-top:env(safe-area-inset-top,0px);
+padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+/* Modo escuro - papel envelhecido */
+@media (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){
+--bg:#2A2419;
+--surface:#3D342A;
+--ink:#E8DFD0;
+--muted:#B5A693;
+--line:#4D4035;
+--hero:#3D342A;
+--shadow:rgba(0,0,0,0.4);
+}
+}
+:root[data-theme="dark"]{
+--bg:#2A2419;
+--surface:#3D342A;
+--ink:#E8DFD0;
+--muted:#B5A693;
+--line:#4D4035;
+--hero:#3D342A;
+--shadow:rgba(0,0,0,0.4);
+}
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+
+/* Textura de papel reciclado via SVG */
+body{
+margin:0;
+background:var(--bg);
+color:var(--ink);
+font-family:"Atkinson Hyperlegible",Verdana,Arial,sans-serif;
+font-size:18px;
+line-height:1.55;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.6'/%3E%3C/svg%3E");
+background-repeat:repeat;
+}
+
+header{
+background:var(--hero);
+color:var(--hero-ink);
+padding:40px 20px 32px;
+border-bottom:6px solid var(--accent);
+position:relative;
+box-shadow:0 4px 12px var(--shadow);
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23paper)'/%3E%3C/svg%3E");
+}
+
+.ods-badge{
+display:inline-block;
+background:var(--accent);
+color:var(--accent-ink);
+font-size:0.75rem;
+font-weight:700;
+padding:4px 10px;
+border-radius:4px;
+margin-top:12px;
+text-transform:uppercase;
+letter-spacing:1px;
+box-shadow:0 2px 4px rgba(0,0,0,0.2);
+}
+
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:2rem;line-height:1.15;margin:0 0 10px;text-shadow:1px 1px 2px rgba(0,0,0,0.2)}
+header p{margin:0;max-width:34em;opacity:.95}
+main{padding:24px 20px 40px}
+
+.tools{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+
+input[type=search]{
+width:100%;
+font:inherit;
+padding:14px 16px;
+border:2px solid var(--line);
+border-radius:8px;
+background:var(--surface);
+color:var(--ink);
+box-shadow:inset 1px 1px 3px var(--shadow), 0 2px 4px var(--shadow);
+transition:box-shadow 0.2s ease, border-color 0.2s ease;
+}
+input[type=search]:focus{
+outline:3px solid var(--accent);
+outline-offset:2px;
+box-shadow:inset 1px 1px 3px var(--shadow), 0 4px 8px var(--shadow);
+}
+
+button:focus-visible,summary:focus-visible,a:focus-visible{
+outline:3px solid var(--accent);
+outline-offset:2px;
+}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{
+font:inherit;
+font-size:.9rem;
+padding:8px 14px;
+border-radius:6px;
+border:2px solid var(--line);
+background:var(--surface);
+color:var(--ink);
+cursor:pointer;
+box-shadow:0 2px 4px var(--shadow);
+transition:all 0.2s ease;
+position:relative;
+}
+.chips button:hover{
+transform:translateY(-2px);
+box-shadow:0 4px 8px var(--shadow);
+}
+.chips button[aria-pressed=true]{
+background:var(--accent);
+border-color:var(--accent);
+color:var(--accent-ink);
+font-weight:700;
+box-shadow:inset 0 2px 4px rgba(0,0,0,0.2), 0 2px 4px var(--shadow);
+}
+
+/* Cards com efeito de papel amassado */
+details{
+background:var(--surface);
+border:2px solid var(--line);
+border-radius:6px;
+margin-bottom:14px;
+box-shadow:2px 3px 8px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.3);
+transition:transform 0.3s ease, box-shadow 0.3s ease;
+position:relative;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='crumple'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' /%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23crumple)'/%3E%3C/svg%3E");
+}
+
+details:nth-child(odd){transform:rotate(0.3deg)}
+details:nth-child(even){transform:rotate(-0.3deg)}
+
+details:hover{
+transform:rotate(0deg) translateY(-3px) scale(1.01);
+box-shadow:3px 6px 16px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+details[open]{
+box-shadow:2px 3px 8px var(--shadow), inset 0 2px 6px rgba(0,0,0,0.05);
+}
+
+summary{
+cursor:pointer;
+padding:16px 18px;
+font-weight:700;
+list-style:none;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+transition:background 0.2s ease;
+}
+summary:hover{background:rgba(212,165,116,0.08)}
+summary::-webkit-details-marker{display:none}
+summary::after{
+content:"+";
+font-size:1.6rem;
+line-height:1;
+color:var(--muted);
+font-weight:400;
+transition:transform 0.3s ease;
+}
+details[open] summary::after{
+content:"−";
+transform:rotate(180deg);
+}
+
+details .body{
+padding:0 18px 16px;
+border-top:1px solid var(--line);
+animation:fadeIn 0.3s ease;
+}
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(-5px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+details .body p{margin:12px 0 0}
+details .body p:first-child{margin-top:16px}
+
+.legal-ref{
+display:inline-block;
+font-size:0.85em;
+color:var(--muted);
+font-style:italic;
+background:rgba(212,165,116,0.15);
+padding:2px 6px;
+border-radius:3px;
+margin-left:4px;
+}
+
+.base-legal{
+margin-top:14px;
+padding:12px;
+background:rgba(93,64,51,0.05);
+border-left:4px solid var(--accent);
+border-radius:4px;
+font-size:0.92em;
+}
+.base-legal summary{
+font-size:0.95em;
+padding:8px 12px;
+font-weight:600;
+}
+.base-legal .body{
+padding:8px 12px 12px;
+border-top:1px solid var(--line);
+}
+
+.tip{
+border-left:4px solid var(--accent);
+padding-left:12px;
+color:var(--muted);
+font-style:italic;
+margin-top:12px;
+background:rgba(212,165,116,0.08);
+padding:10px 12px;
+border-radius:4px;
+}
+
+#vazio{
+display:none;
+padding:16px;
+border:2px dashed var(--line);
+border-radius:8px;
+color:var(--muted);
+background:var(--surface);
+text-align:center;
+}
+
+.ajuda{
+margin-top:28px;
+padding:20px;
+background:var(--surface);
+border:2px solid var(--accent);
+border-radius:8px;
+box-shadow:2px 3px 8px var(--shadow);
+}
+.ajuda h2{
+margin:0 0 12px;
+font-size:1.3rem;
+color:var(--hero);
+}
+.ajuda ul{margin:8px 0 0;padding-left:1.4em}
+.ajuda li{margin:6px 0}
+
+footer{
+padding:0 20px 32px;
+color:var(--muted);
+font-size:.85rem;
+line-height:1.6;
+}
+
+/* Personagem flutuante com balão */
+.floating-info{
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:1000;
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%, 100%{transform:translateY(0px)}
+50%{transform:translateY(-10px)}
+}
+
+.character{
+width:80px;
+height:80px;
+background:var(--accent);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:2.5rem;
+box-shadow:0 4px 12px var(--shadow);
+border:3px solid var(--line);
+cursor:pointer;
+transition:transform 0.3s ease;
+}
+
+.character:hover{
+transform:scale(1.1);
+}
+
+.speech-bubble{
+position:absolute;
+bottom:90px;
+right:0;
+background:var(--surface);
+border:2px solid var(--accent);
+border-radius:12px;
+padding:16px;
+width:280px;
+box-shadow:0 4px 16px var(--shadow);
+opacity:0;
+visibility:hidden;
+transition:opacity 0.3s ease, visibility 0.3s ease;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='paper-bubble'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper-bubble)'/%3E%3C/svg%3E");
+}
+
+.speech-bubble::after{
+content:'';
+position:absolute;
+bottom:-10px;
+right:30px;
+width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid var(--accent);
+}
+
+.floating-info:hover .speech-bubble{
+opacity:1;
+visibility:visible;
+}
+
+.speech-bubble h3{
+margin:0 0 8px;
+font-size:1rem;
+color:var(--hero);
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.speech-bubble p{
+margin:0 0 10px;
+font-size:0.85rem;
+line-height:1.5;
+color:var(--ink);
+}
+
+.speech-bubble a{
+display:inline-block;
+background:var(--accent);
+color:var(--accent-ink);
+padding:6px 12px;
+border-radius:4px;
+text-decoration:none;
+font-size:0.8rem;
+font-weight:700;
+transition:background 0.2s ease;
+}
+
+.speech-bubble a:hover{
+background:var(--hero);
+color:var(--hero-ink);
+}
+
+.close-bubble{
+position:absolute;
+top:8px;
+right:8px;
+background:none;
+border:none;
+font-size:1.2rem;
+cursor:pointer;
+color:var(--muted);
+width:24px;
+height:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+transition:background 0.2s ease;
+}
+
+.close-bubble:hover{
+background:rgba(0,0,0,0.1);
+}
+
+/* Responsividade mobile */
+@media (max-width:640px){
+.floating-info{
+bottom:10px;
+right:10px;
+}
+.character{
+width:60px;
+height:60px;
+font-size:2rem;
+}
+.speech-bubble{
+width:240px;
+bottom:70px;
+right:-10px;
+}
+}
+
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Descomplica CLT</h1>
+<p>Seus direitos trabalhistas em linguagem simples e acessível</p>
+<div class="ods-badge">🌍 ODS 8 - Trabalho Decente e Crescimento Econômico</div>
+</div></header>
+<main><div class="wrap">
+<div class="tools">
+<input type="search" id="busca" placeholder="Busque: férias, 13º, FGTS…" aria-label="Buscar tema">
+<div class="chips" id="chips" role="group" aria-label="Filtrar por assunto"></div>
+<div id="contador" style="text-align:center;color:var(--muted);font-size:0.9rem;margin-top:4px"></div>
+</div>
+<div id="lista"></div>
+<p id="vazio">Nenhum tema encontrado. Tente outra palavra, como “férias” ou “demissão”.</p>
+<section class="ajuda">
+<h2>Onde pedir ajuda</h2>
+<ul>
+<li>Ministério do Trabalho e Emprego: ligue <strong>158</strong> (gratuito).</li>
+<li>Sindicato da sua categoria.</li>
+<li>Defensoria Pública, para orientação jurídica gratuita.</li>
+<li>Justiça do Trabalho, para entrar com uma ação.</li>
+</ul>
+</section>
+</div></main>
+<footer><div class="wrap">
+<strong>Sobre este conteúdo:</strong> Material informativo desenvolvido como atividade de extensão universitária do curso de Ciência da Computação (ODS 8 – Trabalho Decente e Crescimento Econômico). <strong>Não substitui orientação jurídica especializada.</strong><br><br>
+<strong>Fontes legais:</strong> Constituição Federal (Art. 7º), CLT (Decreto-Lei 5.452/1943), Lei 8.036/1990 (FGTS), Lei 4.090/1962 (13º), Lei 7.418/1985 (Vale-transporte), Lei 8.213/1991 (Benefícios Previdenciários), ADCT (Ato das Disposições Constitucionais Transitórias) e outras normas citadas. Consulte sempre a convenção coletiva da sua categoria, que pode garantir direitos adicionais.<br><br>
+Para informações oficiais atualizadas, acesse: <strong>gov.br/trabalho-e-emprego</strong>
+</div></footer>
+
+<!-- Personagem flutuante com informação sobre reforma -->
+<div class="floating-info" id="floatingInfo">
+<div class="character" title="Clique para saber mais sobre a escala 6x1">
+👷
+</div>
+<div class="speech-bubble" id="speechBubble">
+<button class="close-bubble" onclick="document.getElementById('floatingInfo').style.display='none'" aria-label="Fechar">×</button>
+<h3>🔥 Novidade!</h3>
+<p><strong>Escala 6x1:</strong> Há discussões no Congresso sobre mudanças na jornada de trabalho, incluindo propostas de redução para escala 5x2 (5 dias trabalhados, 2 de folga).</p>
+<p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px;">Esta mudança ainda está em debate. Acompanhe as atualizações oficiais.</p>
+<a href="https://www.gov.br/trabalho-e-emprego/pt-br" target="_blank" rel="noopener">Saiba mais no MTE →</a>
+</div>
+</div>
+
+<script>
+// Estrutura: [Categoria, Título, Pergunta, Resposta, Dica, Ref Legal, Base Legal Detalhada]
+var D=[
+// CONTRATO
+["Contrato","Carteira assinada","O que é obrigatório?","O empregador deve registrar você na Carteira de Trabalho (digital ou física) em até 5 dias úteis depois do início do trabalho. O registro garante FGTS, férias, 13º, INSS e acesso ao seguro-desemprego.","Guarde cópias do contrato e dos holerites (contracheques).","Art. 29, CLT","Art. 29 da CLT: O empregador terá o prazo de 5 (cinco) dias úteis para anotar na CTPS, em relação aos trabalhadores que admitir, a data de admissão, a remuneração e as condições especiais, se houver."],
+
+// JORNADA
+["Jornada","Jornada de trabalho","Quantas horas posso trabalhar?","O limite é de 8 horas por dia e 44 horas por semana. Quem trabalha mais de 6 horas por dia tem direito a pelo menos 1 hora de intervalo para descanso e refeição. Na jornada de 4 a 6 horas, o intervalo é de 15 minutos.","Alguns contratos têm jornada menor. Veja o que está escrito no seu.","Art. 7º, XIII, CF/88 e Art. 58, CLT","Art. 7º, XIII da Constituição Federal: duração do trabalho normal não superior a oito horas diárias e quarenta e quatro semanais. Art. 71 da CLT estabelece intervalos de 1h a 2h para jornadas superiores a 6h e 15 minutos para jornadas entre 4h e 6h."],
+
+["Jornada","Horas extras","Como são pagas?","Cada hora extra deve ser paga com adicional de, no mínimo, 50% sobre o valor da hora normal. O limite é de 2 horas extras por dia. Se houver banco de horas, as regras estão no acordo ou na convenção coletiva.","Anote os horários de entrada e saída. Isso ajuda a provar as horas trabalhadas.","Art. 7º, XVI, CF/88 e Art. 59, CLT","Art. 7º, XVI da CF/88: remuneração do serviço extraordinário superior, no mínimo, em cinquenta por cento à do normal. Art. 59 da CLT: a duração diária do trabalho poderá ser acrescida de horas extras, em número não excedente de duas."],
+
+["Jornada","Adicional noturno","Quem tem direito e quanto recebo?","Quem trabalha entre 22h e 5h da manhã tem direito a adicional noturno de, no mínimo, 20% sobre o valor da hora diurna. A hora noturna tem 52 minutos e 30 segundos (e não 60 minutos). Esse direito vale para todos os trabalhadores urbanos com carteira assinada.","Se você trabalha à noite, verifique se o adicional está discriminado no seu holerite.","Art. 7º, IX, CF/88 e Art. 73, CLT","Art. 7º, IX da CF/88: remuneração do trabalho noturno superior à do diurno. Art. 73 da CLT: o trabalho noturno (22h às 5h) terá remuneração superior à do diurno e, para esse efeito, sua remuneração terá um acréscimo de 20% (vinte por cento), pelo menos, sobre a hora diurna. A hora do trabalho noturno será computada como de 52 minutos e 30 segundos."],
+
+// PAGAMENTOS
+["Pagamentos","Salário","O que não pode acontecer?","O salário não pode ser menor que o salário mínimo nacional e deve ser pago até o 5º dia útil do mês seguinte ao trabalhado. Descontos só são permitidos nos casos previstos em lei ou combinados, como INSS, imposto de renda e vale-transporte. O atraso no pagamento é infração trabalhista grave.","Todo pagamento deve vir com holerite detalhado. Se houver atraso, documente e procure orientação.","Art. 7º, IV e VII, CF/88 e Art. 459, CLT","Art. 7º, IV da CF/88: salário mínimo, fixado em lei, nacionalmente unificado. Art. 459 da CLT: o pagamento do salário, qualquer que seja a modalidade do trabalho, não deve ser estipulado por período superior a 1 (um) mês, salvo comissões, percentagens e gratificações."],
+
+["Pagamentos","13º salário","Quando e quanto recebo?","Corresponde a 1/12 do salário por mês trabalhado no ano (meses com 15 dias ou mais contam). A 1ª parcela deve ser paga até 30 de novembro e a 2ª até 20 de dezembro. O 13º incide sobre o salário bruto e sofre descontos de INSS e IR apenas na segunda parcela.","Quem trabalhou o ano todo recebe o equivalente a um salário inteiro. Quem foi demitido recebe proporcional.","Art. 7º, VIII, CF/88 e Lei 4.090/1962","Art. 7º, VIII da CF/88: décimo terceiro salário com base na remuneração integral ou no valor da aposentadoria. Lei 4.090/1962: institui a gratificação de Natal (13º salário), devida a todos os empregados, correspondente a 1/12 da remuneração por mês de serviço do ano correspondente."],
+
+["Pagamentos","Férias","Quando tenho direito?","Depois de 12 meses de trabalho você tem direito a 30 dias de férias, pagas com um adicional de 1/3 do salário. O pagamento deve ser feito até 2 dias antes do início das férias. As férias podem ser divididas em até 3 períodos, desde que você concorde e um deles tenha ao menos 14 dias. Faltas injustificadas reduzem o período de férias.","Você pode converter até 1/3 das férias em dinheiro (abono pecuniário). Peça com 15 dias de antecedência.","Art. 7º, XVII, CF/88 e Arts. 129-153, CLT","Art. 7º, XVII da CF/88: gozo de férias anuais remuneradas com, pelo menos, um terço a mais do que o salário normal. Arts. 129 a 153 da CLT: todo empregado terá direito anualmente ao gozo de um período de férias, sem prejuízo da remuneração, após cada período de 12 meses de vigência do contrato."],
+
+["Pagamentos","FGTS","O que é e para que serve?","É um valor que o empregador deposita todo mês em uma conta em seu nome na Caixa, equivalente a 8% do seu salário. Não é descontado de você. O dinheiro pode ser sacado em situações como demissão sem justa causa, compra de casa própria, aposentadoria, doenças graves, desastres naturais e outros casos previstos em lei.","Confira o extrato no aplicativo FGTS. Se faltarem depósitos, procure ajuda no sindicato ou Ministério do Trabalho.","Art. 7º, III, CF/88 e Lei 8.036/1990","Art. 7º, III da CF/88: fundo de garantia do tempo de serviço. Lei 8.036/1990: o FGTS é constituído por depósitos mensais de 8% da remuneração paga ou devida ao trabalhador, efetuados pelo empregador em conta bancária vinculada."],
+
+["Pagamentos","Adicional de insalubridade","Como funciona?","Trabalhadores expostos a agentes nocivos à saúde (químicos, físicos ou biológicos) acima dos limites de tolerância têm direito ao adicional de insalubridade. O percentual varia conforme o grau: 10% (mínimo), 20% (médio) ou 40% (máximo) sobre o salário mínimo. A caracterização é feita por perícia técnica.","Exija o uso de EPIs. Se a empresa eliminar o risco, o adicional pode deixar de ser pago.","Art. 7º, XXIII, CF/88 e Arts. 189-197, CLT","Art. 7º, XXIII da CF/88: adicional de remuneração para atividades penosas, insalubres ou perigosas, na forma da lei. Art. 192 da CLT: o exercício de trabalho em condições insalubres assegura a percepção de adicional de 10%, 20% ou 40% do salário mínimo, segundo classificação nos graus mínimo, médio e máximo (NR-15 do MTE)."],
+
+["Pagamentos","Adicional de periculosidade","Quem tem direito?","Trabalhadores expostos permanentemente a condições perigosas (explosivos, inflamáveis, energia elétrica, segurança pessoal/patrimonial, motocicleta) têm direito ao adicional de periculosidade de 30% sobre o salário base (sem incluir outros adicionais). A caracterização é feita por perícia técnica conforme NR-16 do MTE.","O adicional é devido mesmo que o risco seja reduzido com EPIs, desde que a exposição continue.","Art. 7º, XXIII, CF/88 e Art. 193, CLT","Art. 7º, XXIII da CF/88: adicional de remuneração para atividades penosas, insalubres ou perigosas. Art. 193 da CLT: são consideradas atividades ou operações perigosas aquelas que, por sua natureza ou métodos de trabalho, impliquem risco acentuado em virtude de exposição permanente do trabalhador a inflamáveis, explosivos ou energia elétrica, roubos ou outras espécies de violência física. O trabalho em condições de periculosidade assegura ao empregado um adicional de 30% sobre o salário sem os acréscimos resultantes de gratificações, prêmios ou participações nos lucros."],
+
+// BENEFÍCIOS
+["Benefícios","Vale-transporte","Como funciona o desconto?","O empregador é obrigado a fornecer vale-transporte para deslocamento casa-trabalho-casa quando solicitado pelo empregado. O desconto no salário é limitado a 6% do salário base. Se o valor do transporte for menor que 6%, desconta-se apenas o valor real. O benefício não tem natureza salarial.","Você pode recusar o vale-transporte, mas precisa declarar por escrito que usa transporte próprio ou não precisa.","Lei 7.418/1985 e Decreto 95.247/1987","Lei 7.418/1985, Art. 4º: a concessão do benefício ora instituído implica a aquisição pelo empregador dos Vales-Transporte necessários aos deslocamentos do trabalhador no percurso residência-trabalho e vice-versa. O empregado contribuirá com o equivalente a 6% do salário básico. Decreto 95.247/1987: regulamenta a Lei 7.418/1985."],
+
+["Benefícios","Vale-alimentação e refeição","É obrigatório?","O vale-alimentação ou vale-refeição não é obrigatório por lei federal, mas pode ser garantido por convenção coletiva da categoria. Empresas que aderem ao PAT (Programa de Alimentação do Trabalhador) têm incentivos fiscais e devem oferecer o benefício. Quando fornecido, não pode ser descontado do salário, salvo se previsto em acordo ou convenção coletiva.","Verifique sua convenção coletiva. Muitas categorias têm o benefício garantido em valor fixo mensal.","Lei 6.321/1976 (PAT)","Lei 6.321/1976: institui o Programa de Alimentação do Trabalhador (PAT), que visa melhorar as condições nutricionais dos trabalhadores. A adesão é voluntária para empresas, mas concede incentivos fiscais. O benefício não integra o salário para fins trabalhistas ou previdenciários quando fornecido através do PAT."],
+
+// DESCANSO
+["Descanso","DSR - Descanso Semanal Remunerado","O que é e quando tenho direito?","Todo trabalhador tem direito a um descanso semanal remunerado de 24 horas consecutivas, preferencialmente aos domingos. O DSR é pago mesmo sem trabalhar e corresponde a um dia de salário. Faltas injustificadas podem levar à perda proporcional do DSR. Quem trabalha por comissão ou hora também tem direito, calculado pela média semanal.","O DSR deve ser pago junto com o salário do mês. Se você trabalhar no dia de descanso sem folga compensatória, deve receber o dia em dobro.","Art. 7º, XV, CF/88 e Art. 67, CLT","Art. 7º, XV da CF/88: repouso semanal remunerado, preferencialmente aos domingos. Art. 67 da CLT: será assegurado a todo empregado um descanso semanal de 24 (vinte e quatro) horas consecutivas, o qual, salvo motivo de conveniência pública ou necessidade imperiosa do serviço, deverá coincidir com o domingo, no todo ou em parte."],
+
+["Descanso","Trabalho aos domingos e feriados","Como funciona?","O trabalho aos domingos e feriados deve ser autorizado previamente pelo Ministério do Trabalho ou estar previsto em convenção coletiva. Quando permitido, o trabalhador deve ter folga compensatória em outro dia ou receber o dia trabalhado em dobro. Alguns setores (comércio, saúde, hotelaria) têm regras específicas de escala.","Se você trabalhar em feriado nacional sem compensação ou pagamento em dobro, isso é irregular. Documente e procure orientação.","Art. 7º, XV, CF/88 e Art. 68, CLT","Art. 68 da CLT: o trabalho em domingo, seja total ou parcial, será sempre subordinado à permissão prévia da autoridade competente em matéria de trabalho. A remuneração será em dobro, salvo se o empregador determinar outro dia de folga. Lei 605/1949, Art. 9º: nas atividades em que não for possível a concessão do repouso aos domingos, será este concedido em outro dia da semana."],
+
+["Descanso","Escala 6x1 e propostas de mudança","O que é e o que pode mudar?","A escala 6x1 significa trabalhar 6 dias seguidos e folgar 1 dia (geralmente com 44 horas semanais). Atualmente é permitida pela CLT quando há acordo ou convenção coletiva. Há discussões no Congresso Nacional sobre propostas para mudar para escala 5x2 (trabalhar 5 dias e folgar 2), mantendo a carga horária semanal. Qualquer mudança depende de aprovação legislativa e pode afetar diferentes setores de formas distintas.","Esta é uma discussão em andamento. Acompanhe notícias oficiais do Congresso Nacional e do Ministério do Trabalho para saber sobre aprovações e mudanças.","Art. 7º, XIII e XV, CF/88 e Art. 59, CLT","Art. 7º da CF/88 estabelece a duração máxima de trabalho (44h semanais) e o repouso semanal remunerado. Propostas legislativas como a PEC que visa acabar com a escala 6x1 estão em tramitação no Congresso Nacional. Qualquer alteração precisará de aprovação em votação e pode prever períodos de transição para adequação dos setores econômicos."],
+
+// ESTABILIDADE
+["Estabilidade","Estabilidade da gestante","Quanto tempo dura?","A trabalhadora gestante tem estabilidade provisória no emprego desde a confirmação da gravidez até 5 meses após o parto. Isso significa que não pode ser demitida sem justa causa nesse período, mesmo que a empresa não soubesse da gravidez no momento da demissão. Se for demitida indevidamente, tem direito à reintegração ou indenização do período.","Guarde todos os documentos médicos que comprovem a gravidez e as datas. Avise a empresa o quanto antes.","Art. 10, II, 'b', ADCT","Art. 10, II, 'b' do Ato das Disposições Constitucionais Transitórias (ADCT): fica vedada a dispensa arbitrária ou sem justa causa da empregada gestante, desde a confirmação da gravidez até cinco meses após o parto. Súmula 244 do TST: o desconhecimento da gravidez pelo empregador não afasta o direito à estabilidade."],
+
+["Estabilidade","Estabilidade acidentária","Como funciona?","O trabalhador que sofre acidente de trabalho ou doença ocupacional tem direito à estabilidade de 12 meses após o fim do auxílio-doença acidentário (B91), desde que o afastamento seja superior a 15 dias e gere benefício previdenciário. Durante esse período, não pode ser demitido sem justa causa.","Registre o acidente imediatamente com a empresa através da CAT (Comunicação de Acidente de Trabalho). Isso é fundamental para garantir seus direitos.","Art. 118, Lei 8.213/1991","Art. 118 da Lei 8.213/1991: o segurado que sofreu acidente do trabalho tem garantida, pelo prazo mínimo de doze meses, a manutenção do seu contrato de trabalho na empresa, após a cessação do auxílio-doença acidentário, independentemente de percepção de auxílio-acidente."],
+
+["Estabilidade","Estabilidade do CIPA","Quem tem direito?","Os membros eleitos da CIPA (Comissão Interna de Prevenção de Acidentes) - titulares e suplentes - têm estabilidade desde o registro da candidatura até um ano após o fim do mandato. Isso protege os representantes dos trabalhadores de demissões arbitrárias por atuarem na prevenção de acidentes.","Se você for candidato ou membro da CIPA, guarde toda a documentação da eleição e do mandato.","Art. 10, II, 'a', ADCT e Art. 165, CLT","Art. 10, II, 'a' do ADCT: fica vedada a dispensa arbitrária ou sem justa causa do empregado eleito para cargo de direção de comissões internas de prevenção de acidentes, desde o registro da candidatura até um ano após o final do mandato. Art. 165 da CLT: os membros da CIPA não poderão sofrer despedida arbitrária."],
+
+// DEMISSÃO
+["Demissão","Aviso prévio","Quanto tempo de aviso?","Na demissão sem justa causa, o aviso é de 30 dias, mais 3 dias por ano completo de trabalho, até o máximo de 90 dias. O aviso pode ser trabalhado (você continua trabalhando no período) ou indenizado (você recebe o valor em dinheiro e é dispensado imediatamente). Durante o aviso prévio trabalhado, a jornada é reduzida em 2 horas por dia ou 7 dias corridos.","Quem pede demissão também deve cumprir o aviso prévio de 30 dias, trabalhado ou descontado do valor da rescisão.","Art. 7º, XXI, CF/88 e Arts. 487-491, CLT","Art. 7º, XXI da CF/88: aviso prévio proporcional ao tempo de serviço, sendo no mínimo de trinta dias. Lei 12.506/2011: ao aviso prévio de 30 dias serão acrescidos 3 dias por ano de serviço prestado na mesma empresa, até o máximo de 60 dias, perfazendo um total de até 90 dias."],
+
+["Demissão","Rescisão de contrato","O que recebo ao ser demitido?","Na demissão sem justa causa você recebe: saldo de salário dos dias trabalhados, férias vencidas e proporcionais com adicional de 1/3, 13º salário proporcional, aviso prévio (se indenizado), multa de 40% sobre o FGTS depositado. Também pode sacar o FGTS total e solicitar seguro-desemprego (se preencher os requisitos). O pagamento deve ser feito em até 10 dias corridos após o fim do contrato.","Leia o termo de rescisão antes de assinar e confira todos os valores. Se houver erro, não assine e peça correção.","Arts. 477-486, CLT","Art. 477 da CLT: na extinção do contrato de trabalho, o empregador deverá proceder à anotação na CTPS, comunicar a dispensa aos órgãos competentes e realizar o pagamento das verbas rescisórias em até 10 dias. Art. 18 da Lei 8.036/1990: na demissão sem justa causa, depositará o empregador na conta vinculada do trabalhador importância igual a 40% do montante de todos os depósitos de FGTS."],
+
+// FAMÍLIA
+["Família","Licença-maternidade e paternidade","Quanto tempo de licença?","A licença-maternidade é de 120 dias (4 meses) com salário integral pago pelo INSS (empresa paga e depois é reembolsada). Em empresas do Programa Empresa Cidadã, pode chegar a 180 dias. A licença-paternidade é de 5 dias corridos, podendo ser estendida para 20 dias nas empresas do programa. Em caso de adoção, os prazos são os mesmos.","Avise a empresa com antecedência e entregue o atestado médico ou certidão de nascimento. A licença-maternidade pode começar até 28 dias antes do parto.","Art. 7º, XVIII, CF/88 e Arts. 392-400, CLT","Art. 7º, XVIII da CF/88: licença à gestante, sem prejuízo do emprego e do salário, com duração de cento e vinte dias. Art. 392 da CLT: a empregada gestante tem direito à licença-maternidade de 120 dias, sem prejuízo do emprego e do salário. Art. 10, §1º do ADCT e Lei 13.257/2016: licença-paternidade de 5 dias, extensível a 20 dias no Programa Empresa Cidadã."],
+
+// SAÚDE
+["Saúde","Atestado médico","Como funciona?","O atestado médico justifica faltas por motivo de saúde sem desconto no salário. Atestados de até 15 dias consecutivos são pagos pela empresa. A partir do 16º dia, o trabalhador deve solicitar auxílio-doença ao INSS. O atestado deve ser entregue no prazo estabelecido pela empresa (geralmente 48h). Consultas e exames durante o expediente também podem ser abonados com atestado.","Sempre peça atestado médico em qualquer consulta ou tratamento. Guarde cópias de todos os documentos.","Art. 60, Lei 8.213/1991 e Art. 473, CLT","Art. 60 da Lei 8.213/1991: o auxílio-doença será devido ao segurado que ficar incapacitado para o trabalho por mais de 15 dias consecutivos. Art. 473 da CLT: o empregado poderá deixar de comparecer ao serviço sem prejuízo do salário em casos de doença devidamente comprovada."],
+
+["Saúde","Acidente de trabalho","O que fazer?","Acidente de trabalho é aquele que ocorre no exercício do trabalho, causando lesão corporal ou perturbação funcional. Inclui acidentes no trajeto casa-trabalho (acidente de trajeto) e doenças ocupacionais. A empresa DEVE emitir a CAT (Comunicação de Acidente de Trabalho) em até 1 dia útil. Se a empresa não emitir, você, seus dependentes, o sindicato ou médico podem fazer.","Procure atendimento médico imediatamente, comunique a empresa por escrito e exija a CAT. Isso garante estabilidade e outros direitos.","Arts. 19-23, Lei 8.213/1991","Art. 19 da Lei 8.213/1991: acidente do trabalho é o que ocorre pelo exercício do trabalho a serviço da empresa, provocando lesão corporal ou perturbação funcional. Art. 22: a empresa deverá comunicar o acidente do trabalho à Previdência Social até o 1º dia útil seguinte ao da ocorrência."],
+
+// CONTRATO (novos tipos)
+["Contrato","Contrato de experiência","Quanto tempo dura?","O contrato de experiência é um período de teste que pode durar no máximo 90 dias. Pode ser dividido em dois períodos (exemplo: 45 + 45 dias), mas a soma não pode ultrapassar 90 dias. Durante a experiência, você tem todos os direitos trabalhistas (FGTS, férias proporcionais, 13º). Se for demitido antes do fim sem justa causa, recebe indenização de metade do período restante.","Após 90 dias, o contrato vira automático por prazo indeterminado se você continuar trabalhando.","Art. 443, §2º, CLT","Art. 443, §2º da CLT: o contrato de experiência não poderá exceder de 90 (noventa) dias. Considera-se por prazo indeterminado todo contrato que suceder, dentro de 6 (seis) meses, a outro contrato por prazo determinado."],
+
+["Contrato","Trabalho intermitente","Como funciona?","No contrato intermitente, você trabalha apenas quando é convocado, com períodos de inatividade. A convocação deve ser feita com 3 dias de antecedência. Você pode aceitar ou recusar. Quando trabalha, recebe proporcionalmente: salário, férias com 1/3, 13º, descanso semanal e FGTS. O pagamento é imediato ao fim de cada período trabalhado. Você pode ter outros empregos simultâneos.","Aceitar ou recusar convocações não caracteriza insubordinação. Você mantém seus direitos proporcionais ao tempo efetivamente trabalhado.","Art. 443, §3º e Arts. 452-A a 452-H, CLT","Art. 452-A da CLT (Lei 13.467/2017): contrato de trabalho intermitente é aquele no qual a prestação de serviços não é contínua, ocorrendo com alternância de períodos de prestação de serviços e de inatividade. O empregado receberá, ao final de cada período de prestação de serviço, remuneração, férias proporcionais com acréscimo de um terço, décimo terceiro salário proporcional, repouso semanal remunerado e adicionais legais."],
+
+// JORNADA (novos)
+["Jornada","Banco de horas","O que é?","Sistema de compensação onde horas extras trabalhadas são compensadas com folgas, em vez de pagamento. Deve ser estabelecido por acordo coletivo ou individual escrito. O período de compensação pode ser de até 6 meses (acordo individual) ou até 1 ano (acordo coletivo). Se não houver compensação no prazo, as horas devem ser pagas como extras com adicional de 50%.","Acompanhe seu saldo de horas. Se a empresa não compensar no prazo, você tem direito ao pagamento das horas extras.","Art. 59, §5º e §6º, CLT","Art. 59, §5º da CLT (Lei 13.467/2017): o banco de horas poderá ser pactuado por acordo individual escrito, desde que a compensação ocorra no período máximo de seis meses. §6º: é lícito o regime de compensação de jornada estabelecido por acordo coletivo ou convenção coletiva, no prazo máximo de um ano."],
+
+["Jornada","Sobreaviso e prontidão","Qual a diferença?","Sobreaviso é quando você fica em casa aguardando ser chamado para trabalhar (comum com celular/bip), recebendo 1/3 do salário-hora. Prontidão é quando você fica nas dependências da empresa aguardando ordens, recebendo 2/3 do salário-hora. O período máximo é de 24 horas. Se for efetivamente chamado ao trabalho, o tempo trabalhado é pago como hora normal ou extra.","Guarde registros de todas as vezes que você ficou de sobreaviso ou foi chamado fora do expediente.","Arts. 244 e 245, CLT (aplicação analógica)","Arts. 244 e 245 da CLT (originalmente para ferroviários, aplicados analogicamente): as horas de sobreaviso serão pagas à razão de 1/3 (um terço) do salário normal. As horas de prontidão, nas dependências da empresa, serão pagas à razão de 2/3 (dois terços) do salário-hora normal."],
+
+// DEMISSÃO (mais detalhes)
+["Demissão","Seguro-desemprego","Quem tem direito?","Trabalhador demitido sem justa causa pode solicitar o seguro-desemprego. Requisitos: ter recebido salário de pessoa jurídica por pelo menos 12 meses nos últimos 18 meses (primeira solicitação) ou 9 meses nos últimos 12 meses (segunda solicitação). Não pode ter renda própria suficiente. O número de parcelas varia de 3 a 5, conforme tempo trabalhado. O benefício não pode ser menor que 1 salário mínimo.","Solicite o seguro-desemprego de 7 a 120 dias após a demissão, pelo app Carteira de Trabalho Digital, site gov.br ou SINE.","Lei 7.998/1990 e Lei 13.134/2015","Lei 7.998/1990, Art. 3º: terá direito ao seguro-desemprego o trabalhador dispensado sem justa causa que comprove ter recebido salários nos últimos meses e não possuir renda própria. Lei 13.134/2015: o número de parcelas varia de 3 a 5 conforme o tempo trabalhado (12 a 23 meses = 4 parcelas; 24+ meses = 5 parcelas)."],
+
+["Demissão","Demissão por justa causa","Quais os motivos?","A justa causa é a falta grave cometida pelo empregado que rompe a confiança. Motivos: desonestidade, mau procedimento, negociação sem autorização, condenação criminal, desídia (desleixo), embriaguez no trabalho, violação de segredo, indisciplina, abandono de emprego (mais de 30 dias sem justificativa), agressão, e outros. Na justa causa, o trabalhador perde direitos: não recebe aviso prévio, multa de 40% do FGTS, nem pode sacar o FGTS ou pedir seguro-desemprego.","Se você foi demitido por justa causa injustamente, procure um advogado trabalhista. A empresa precisa provar a falta grave.","Art. 482, CLT","Art. 482 da CLT: constituem justa causa para rescisão do contrato de trabalho pelo empregador: ato de improbidade; incontinência de conduta ou mau procedimento; negociação habitual; condenação criminal; desídia; embriaguez; violação de segredo; indisciplina ou insubordinação; abandono de emprego; ato lesivo da honra; ofensas físicas; práticas constantes de jogos de azar; atos atentatórios à segurança nacional."]
+];
+// Mapear ícones por categoria
+var catIcons = {
+"Contrato": "📋",
+"Jornada": "⏰",
+"Pagamentos": "💰",
+"Benefícios": "🎁",
+"Descanso": "🛌",
+"Estabilidade": "🛡️",
+"Demissão": "📄",
+"Família": "👶",
+"Saúde": "🏥"
+};
+
+var cats=["Todos"].concat(D.map(function(x){return x[0]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var cat="Todos",q="";
+var $l=document.getElementById("lista"),$c=document.getElementById("chips"),$v=document.getElementById("vazio"),$cnt=document.getElementById("contador");
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function render(){
+$c.innerHTML="";
+cats.forEach(function(c){
+var b=document.createElement("button");
+var icon = catIcons[c] || "";
+b.textContent=(icon ? icon + " " : "") + c;
+b.setAttribute("aria-pressed",c===cat);
+b.onclick=function(){cat=c;render()};
+$c.appendChild(b)
+});
+var n=0,h="";
+D.forEach(function(x){
+if(cat!=="Todos"&&x[0]!==cat)return;
+if(q&&norm(x.join(" ")).indexOf(norm(q))<0)return;
+n++;
+// x[0]=Categoria, x[1]=Título, x[2]=Pergunta, x[3]=Resposta, x[4]=Dica, x[5]=Ref Legal, x[6]=Base Legal
+var legalRef = x[5] ? '<span class="legal-ref">' + esc(x[5]) + '</span>' : '';
+var baseLegal = x[6] ? '<details class="base-legal"><summary>📜 Base Legal</summary><div class="body"><p>' + esc(x[6]) + '</p></div></details>' : '';
+h+='<details><summary>'+esc(x[1])+'</summary><div class="body">';
+h+='<p><strong>'+esc(x[2])+'</strong></p>';
+h+='<p>'+esc(x[3])+legalRef+'</p>';
+h+='<p class="tip">💡 '+esc(x[4])+'</p>';
+h+=baseLegal;
+h+='</div></details>';
+});
+$l.innerHTML=h;
+$v.style.display=n?"none":"block";
+$cnt.textContent=n ? (n===1 ? "1 direito encontrado" : n+" direitos encontrados") : "";
+}
+document.getElementById("busca").addEventListener("input",function(e){q=e.target.value.trim();render()});
+render();
+
+// Controle do balão flutuante
+(function(){
+var character = document.querySelector('.character');
+var bubble = document.getElementById('speechBubble');
+var isOpen = false;
+
+if(character && bubble){
+// Toggle do balão ao clicar no personagem
+character.addEventListener('click', function(e){
+e.stopPropagation();
+isOpen = !isOpen;
+if(isOpen){
+bubble.style.opacity = '1';
+bubble.style.visibility = 'visible';
+}else{
+bubble.style.opacity = '0';
+bubble.style.visibility = 'hidden';
+}
+});
+
+// Manter balão aberto ao interagir com ele
+bubble.addEventListener('click', function(e){
+e.stopPropagation();
+});
+
+// Fechar ao clicar fora
+document.addEventListener('click', function(){
+if(isOpen){
+bubble.style.opacity = '0';
+bubble.style.visibility = 'hidden';
+isOpen = false;
+}
+});
+
+// Mostrar balão automaticamente após 3 segundos
+setTimeout(function(){
+bubble.style.opacity = '1';
+bubble.style.visibility = 'visible';
+isOpen = true;
+// Auto-fechar após 10 segundos
+setTimeout(function(){
+bubble.style.opacity = '0';
+bubble.style.visibility = 'hidden';
+isOpen = false;
+}, 10000);
+}, 3000);
+}
+})();
+</script>
+</body>
+</html>
